@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="XeengReport" default="default" basedir=".">
+    <description>Builds, tests, and runs the project Report.</description>
+    
+   <!-- project-specific variables -->
+    <property name="jsp.dir.name" value="XeengReport" />
+    <property name="package.name" value="${jsp.dir.name}.war" />
+    <property name="webapp.dir" value="E:/tomcat/webapps" />
+
+    <property environment="env" />
+    <property name="build.dir" value="build" />
+    <property file="${build.dir}/build.${env.HOSTNAME}" />     
+    <property name="lib.dir" value="lib" />
+    <property name="pages.dir" value="pages" />
+    <property name="src.dir" value="src" />
+    <property name="resources.dir" value="res" />
+    <property name="dest.dir" value="dest" />
+    <property name="web.dir" value="web" />
+    <property name="i18n.dir" value="${src.dir}/java/i18n" />
+
+    <!-- put everything in a temp folder with the right structure during the build -->
+    <property name="temp.dir" value="${build.dir}" />
+    <property name="temp.dir.web-inf" value="${temp.dir}/WEB-INF" />
+    <property name="temp.dir.lib" value="${temp.dir.web-inf}/lib" />
+    <property name="temp.dir.classes" value="${temp.dir.web-inf}/classes" />
+    <property name="temp.dir.i18n" value="${temp.dir.classes}/i18n" />
+    <property name="temp.dir.meta-inf" value="${temp.dir}/META-INF" />
+    <property name="package.file" value="${dest.dir}/${package.name}" />
+
+    <path id="build.class.path">
+        <fileset dir="web/WEB-INF/lib">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+
+    <target name="clean">
+        <delete>
+            <fileset dir="${dest.dir}" includes="**/*"/>
+        </delete>
+        <delete dir="${temp.dir}" />
+        <delete dir="${temp.dir.classes}" />
+        <delete dir="${temp.dir.meta-inf}" />
+        <delete dir="${temp.dir.web-inf}" />
+    </target>
+
+    <target name="prepare" depends="clean">
+        <mkdir dir="${dest.dir}" />
+        <mkdir dir="${temp.dir}" />
+        <mkdir dir="${temp.dir.lib}" />
+        <mkdir dir="${temp.dir.meta-inf}" />
+        <mkdir dir="${temp.dir.web-inf}" />
+        <mkdir dir="${temp.dir.classes}" />
+        <mkdir dir="${temp.dir.i18n}" />
+    </target>
+
+    <!-- COMPILE -->
+    <target name="compile" depends="prepare">
+        <echo>=== COMPILE ===</echo>
+        <echo>Compiling ${src.dir} files ...</echo>
+        <javac debug="on" srcdir="${src.dir}" destdir="${temp.dir.classes}" includes="**/*">
+            <classpath refid="build.class.path" />
+        </javac>
+        
+        <native2ascii encoding="UTF-8" src="${i18n.dir}" dest="${temp.dir.i18n}" includes="**/*"></native2ascii>
+
+    </target>
+
+    <!-- PACKAGE -->
+    <target name="package" depends="compile">
+      <echo>=== PACKAGE ===</echo>     
+      <!-- copy the config files -->
+      <!-- 
+      <copy file="${resources.dir}/MANIFEST.MF" tofile="${temp.dir.meta-inf}/MANIFEST.MF" overwrite="true" />
+      <copy file="${resources.dir}/web.xml" tofile="${temp.dir.web-inf}/web.xml" overwrite="true" />
+      -->
+      <!--  copy webdir -->
+     <copy todir="${temp.dir}">
+        <fileset dir="${web.dir}" />
+     </copy>
+         
+      <copy todir="${temp.dir.classes}">
+          <fileset dir="${src.dir}/java">
+          <include name="**/*.xml"/>
+          <include name="**/*.xsl"/>
+        </fileset>
+      </copy>
+      
+      <copy todir="${temp.dir.i18n}">
+        <fileset dir="${src.dir}/java/i18n">
+          <include name="**/*"/>
+        </fileset>
+      </copy>
+    	
+      <!-- the ant war task. with all resources in place, create the war file -->
+      <war destfile="${package.file}" webxml="${temp.dir.web-inf}/web.xml" basedir="${temp.dir}">
+        <fileset dir="${temp.dir}"/>
+        <lib dir="${temp.dir.lib}" />
+        <classes dir="${temp.dir.classes}" />
+      </war>
+      
+      </target>
+    
+	
+    <!-- INSTALL -->
+	<target name="install" depends="package">
+      <echo>=== INSTALL ===</echo>
+      <copy file="${package.file}" tofile="${webapp.dir}/${package.name}" overwrite="true" />
+    </target>
+
+    <target name="cron-jar" depends="compile">
+      <echo>=== building jars for cronjobs ====</echo>
+      <jar destfile="Hourly.jar"
+        basedir="build/WEB-INF/classes/"
+        includes="com/tv/xeeng/reporttool/cron/*.class"
+        excludes="com/tv/xeeng/reporttool/cron/DailyTask.class">
+        <manifest>
+          <attribute name="Main-Class" value="com.tv.xeeng.reporttool.cron.HourlyTask"/>
+          <attribute name="Class-Path" value="lib/sqljdbc4.jar"/>
+        </manifest>
+      </jar>
+      <jar destfile="Daily.jar"
+        basedir="build/WEB-INF/classes/"
+        includes="com/tv/xeeng/reporttool/cron/*.class"
+        excludes="com/tv/xeeng/reporttool/cron/HourlyTask.class">
+        <manifest>
+          <attribute name="Main-Class" value="com.tv.xeeng.reporttool.cron.DailyTask"/>
+          <attribute name="Class-Path" value="lib/sqljdbc4.jar"/>
+        </manifest>
+      </jar>
+    </target>
+    
+</project>

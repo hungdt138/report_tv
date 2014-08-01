@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <form-beans>
+        <form-bean name="AdvListForm" type="com.tv.xeeng.reporttool.forms.AdvListForm"/>
+        <form-bean name="ChangePasswordForm" type="com.tv.xeeng.reporttool.forms.ChangePasswordForm"/>
+        <form-bean name="UserByDayReportForm" type="com.tv.xeeng.reporttool.forms.UserByDayReportForm"/>
+        <form-bean name="UserByPartnerReportForm" type="com.tv.xeeng.reporttool.forms.UserByPartnerReportForm"/>        
+        <form-bean name="RegisterReportForm" type="com.tv.xeeng.reporttool.forms.RegisterReportForm"/>
+        <form-bean name="DailyStatReportForm" type="com.tv.xeeng.reporttool.forms.DailyStatReportForm"/>
+        <form-bean name="ChargingDetailReportForm" type="com.tv.xeeng.reporttool.forms.ChargingDetailReportForm"/>
+        <form-bean name="PartnerMonthlyReportForm" type="com.tv.xeeng.reporttool.forms.PartnerMonthlyReportForm"/>
+        <form-bean name="LoginForm" type="com.tv.xeeng.reporttool.forms.LoginForm"/>
+        <form-bean name="UserForm" type="com.tv.xeeng.reporttool.forms.UserForm"/>
+        <form-bean name="ReportUserForm" type="com.tv.xeeng.reporttool.forms.ReportUserForm" /> 
+        <form-bean name="AddReportUserForm" type="com.tv.xeeng.reporttool.forms.AddReportUserForm"/>
+        <form-bean name="QuestionListForm" type="com.tv.xeeng.reporttool.forms.QuestionListForm" />
+        <form-bean name="QuestionForm" type="com.tv.xeeng.reporttool.forms.QuestionForm"/>
+        <form-bean name="GiftCodeListForm" type="com.tv.xeeng.reporttool.forms.GiftCodeListForm"/>
+        <form-bean name="AddGiftCodeForm" type="com.tv.xeeng.reporttool.forms.AddGiftCodeForm"/>
+        <form-bean name="GiftCodeUseForm" type="com.tv.xeeng.reporttool.forms.GiftCodeUseForm"/>
+        <form-bean name="AdvertisingListForm" type="com.tv.xeeng.reporttool.forms.AdvertisingListForm"/>
+        <form-bean name="AdvertisingForm" type="com.tv.xeeng.reporttool.forms.AdvertisingForm"/>
+        <form-bean name="GoldenHourListForm" type="com.tv.xeeng.reporttool.forms.GoldenHourListForm"/>
+        <form-bean name="GoldenHourForm" type="com.tv.xeeng.reporttool.forms.GoldenHourForm"/>
+        <form-bean name="WorkingUserListForm" type="com.tv.xeeng.reporttool.forms.WorkingUserListForm"/>
+        <form-bean name="ChangePassWorkingUserForm" type="com.tv.xeeng.reporttool.forms.ChangePassWorkingUserForm"/>
+        <form-bean name="WorkingUserForm" type="com.tv.xeeng.reporttool.forms.WorkingUserForm"/>
+        <form-bean name="WorkingUserListByNameForm" type="com.tv.xeeng.reporttool.forms.WorkingUserListByNameForm"/>
+        <form-bean name="AddSuperUserForm" type="com.tv.xeeng.reporttool.forms.AddSuperUserForm" />
+        <form-bean name="GiftCodeForm" type="com.tv.xeeng.reporttool.forms.GiftCodeForm"/>
+        <form-bean name="ChangeUserCashForm" type="com.tv.xeeng.reporttool.forms.ChangeUserCashForm"/>
+    </form-beans>
+    
+    <global-exceptions>
+    </global-exceptions>
+    
+    <global-forwards>
+        <!--<forward name="login"  path="/login.html"/>-->
+    </global-forwards>
+    
+    <action-mappings>
+        
+        <action path="/getGiftCodeByName" name="GiftCodeListForm" type="com.tv.xeeng.reporttool.action.GetGiftCodeByMoneyAction" scope="request" validate="false">
+            <forward name="success" path="/giftcode_listbyname.jsp?menuChoosed=giftL"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+        
+        <action path="/getGiftCode" name="GiftCodeForm" input="/giftcode_list.jsp" type="com.tv.xeeng.reporttool.action.GetAGiftCodeAction" scope="request" validate="false">
+            <forward name="success" path="/giftcode.jsp?menuChoosed=giftL"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+            <forward name="searchbymoney" path="/getGiftCodeByName.html"/>
+        </action>
+        
+        <action path="/addSuperUser" name="AddSuperUserForm" input="/admin_superusers_list.jsp" type="com.tv.xeeng.reporttool.action.AddSuperUserAction" scope="request" validate="false">
+            <forward name="success" path="/success_notifi.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+        
+        <action path="/workingUserListByName" name="WorkingUserListByNameForm" type="com.tv.xeeng.reporttool.action.WorkingUserListByNameAction" scope="request" validate="false">
+            <forward name="success" path="/workinguser_listbyname.jsp?m=wuser"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+        
+        <action path="/searchWorkingUser" name="WorkingUserForm" input="workinguser_list.jsp" type="com.tv.xeeng.reporttool.action.SearchWorkingUserAction" scope="request" validate="false">
+            <forward name="success" path="/workinguser.jsp?m=wuser"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+            <forward name="searchbyname" path="/workingUserListByName.html?page=1&amp;m=wuser" />
+        </action>
+        
+        <action path="/changePassWorkingUser" input="/changepass_workinguser.jsp" name="ChangePassWorkingUserForm" type="com.tv.xeeng.reporttool.action.ChangePassWorkingUserAction" scope="request" validate="false" >
+            <forward name="success" path="/success_notifi.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+        
+        <action path="/getAWorkingUser" name="ChangePassWorkingUserForm" type="com.tv.xeeng.reporttool.action.GetAWorkingUserAction" scope="request" validate="false">
+            <forward name="success" path="/changepass_workinguser.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+        
+        <action path="/workingUserList" name="WorkingUserListForm" type="com.tv.xeeng.reporttool.action.WorkingUserListAction" scope="request" validate="false">
+            <forward name="success" path="/workinguser_list.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+        
+        <action path="/deleteSuperUser" type="com.tv.xeeng.reporttool.action.DeleteSuperUserAction" scope="request" validate="false">
+            <forward name="success" path="/success_notifi.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+        
+        <action path="/deleteGoldenhour" input="/" type="com.tv.xeeng.reporttool.action.DeleteGoldenHourAction" scope="request" validate="false">
+            <forward name="success" path="/success_notifi.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+        
+        <action path="/updateGoldenhour" name="GoldenHourForm" input="/update_goldenhour.jsp" type="com.tv.xeeng.reporttool.action.UpdateGoldenHourAction"  scope="request" validate="false">
+            <forward name="success" path="/success_notifi.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+        
+        <action path="/getGoldenHour" input="/" name="GoldenHourForm" type="com.tv.xeeng.reporttool.action.GetAGoldenHourAction" scope="request" validate="false">
+            <forward name="success" path="/update_goldenhour.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+        
+        <action path="/addGoldenhour" name="GoldenHourForm" input="/add_goldenhour.jsp" type="com.tv.xeeng.reporttool.action.AddGoldenHourAction" scope="request" validate="false">
+            <forward name="success" path="/success_notifi.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+        
+        <action path="/goldenhourList" input="/" name="GoldenHourListForm" type="com.tv.xeeng.reporttool.action.GoldenHourListAction" scope="request" validate="false"> 
+            <forward name="success" path="/goldenhour_list.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+        
+        <action path="/deleteAdvertising" input="/" type="com.tv.xeeng.reporttool.action.DeleteAdvertisingAction" scope="request" validate="false">            
+            <forward name="success" path="/success_notifi.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+        
+        <action path="/updateAdvertising" input="/update_Advertising.jsp" name="AdvertisingForm" type="com.tv.xeeng.reporttool.action.UpdateAdvertisingAction" scope="request" validate="false">
+            <forward name="success" path="/success_notifi.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+        
+        <action path="/getAdvertising" input="/" name="AdvertisingForm" type="com.tv.xeeng.reporttool.action.GetAdvertisingAction" scope="request"  validate="false">
+            <forward name="success" path="/update_advertising.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+        
+        <action path="/addAdvertising" input="/add_advertising.jsp" name="AdvertisingForm" type="com.tv.xeeng.reporttool.action.AddAdvertisingAction" scope="request" validate="false">
+            <forward name="success" path="/success_notifi.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+        
+        <action path="/advertisingList" input="/" name="AdvertisingListForm" type="com.tv.xeeng.reporttool.action.AdvertisingListAction" scope="request" validate="false">
+            <forward name="success" path="/advertising_list.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+        
+        <action input="/giftcode_use.jsp" name="GiftCodeUseForm" path="/giftcodeUse" type="com.tv.xeeng.reporttool.action.GiftCodeUseAction" scope="request" validate="false">
+            <forward name="success" path="/success_notifi.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>            
+        </action>
+        
+        <action input="/" path="/deleteGiftCode" type="com.tv.xeeng.reporttool.action.DeleteGiftCodeAction" scope="request" validate="false" >
+            <forward name="success" path="/success_notifi.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+        
+        <action input="/add_giftcode.jsp" name="AddGiftCodeForm" path="/addGiftCode" type="com.tv.xeeng.reporttool.action.AddGiftCodeAction"  scope="request" validate="false">
+            <forward name="success" path="/success_notifi.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+        
+        <action input="/" name="GiftCodeListForm" path="/listGiftCode" scope="request" type="com.tv.xeeng.reporttool.action.GiftCodeListAction" validate="false"> 
+            <forward name="success" path="/giftcode_list.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+        
+        <action input="/update_question.jsp" path="/updateQuestion"  name="QuestionForm" scope="request" type="com.tv.xeeng.reporttool.action.QuestionUpdateAction" validate="false">
+            <forward name="success" path="/success_notifi.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+        
+        <action input="/" path="/getAQuestion" name="QuestionForm" scope="request" type="com.tv.xeeng.reporttool.action.GetAQuestionAction" validate="false"> 
+            <forward name="success" path="/update_question.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+        
+        <action input="/" path="/deleteQuestion" scope="request" type="com.tv.xeeng.reporttool.action.DeleteQuestionAction" validate="false" >
+            <forward name="success" path="/success_notifi.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>    
+        </action>
+        
+        <action input="/add_question.jsp" path="/addQuestion" name="QuestionForm" scope="request" type="com.tv.xeeng.reporttool.action.AddQuestionAction" validate="false">
+            <forward name="success" path="/success_notifi.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>            
+        </action>
+        
+        <action input="/" name="QuestionListForm" path="/questionList" scope="request" type="com.tv.xeeng.reporttool.action.QuestionListAction" validate="false">
+            <forward name="success" path="/question_list.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+        
+        <action input="/"  path="/getReportUserById" scope="request" type="com.tv.xeeng.reporttool.action.GetReportUserByIdAction" validate="false">
+            <forward name="success" path="/update_report_user.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+        
+        <action input="/" path="/deleteReportUser" scope="request" type="com.tv.xeeng.reporttool.action.DeleteReportUserAction" validate="false">
+            <forward name="success" path="/success_notifi.jsp"/>
+        </action>
+        
+        <action input="/update_report_user.jsp" name="AddReportUserForm" path="/updateReportUser"  scope="request" type="com.tv.xeeng.reporttool.action.UpdateReportUserAction" validate="false">
+            <forward name="success" path="/success_notifi.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+        
+        <action input="/add_report_user.jsp" name="AddReportUserForm" path="/addReportUser"  scope="request" type="com.tv.xeeng.reporttool.action.AddReportUserAction" validate="false">
+            <forward name="success" path="/success_notifi.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+        
+        
+        <action input="/" name="ReportUserForm" path="/listReportUser"  scope="request" type="com.tv.xeeng.reporttool.action.ListReportUserAction" validate="false">
+            <forward name="success" path="/list_report_user.jsp"/>
+            <forward name="fail" path="/empty_data.jsp"/>
+        </action>
+        
+        <action input="/login.jsp" name="LoginForm" path="/login" scope="request" type="com.tv.xeeng.reporttool.action.LoginAction">
+            <forward name="success" path="/emptypage.jsp" />
+            <forward name="fail" path="/login.jsp" />
+            <forward name="show" path="/login.jsp" />
+        </action>
+
+        <action path="/logout" name="LogoutForm" scope="request" type="com.tv.xeeng.reporttool.action.LogoutAction">
+            <forward name="success" path="/login.jsp" />
+        </action>
+        <action input="/" name="ChargingDetailReportForm" path="/reportChargingDetail" scope="request" type="com.tv.xeeng.reporttool.action.ChargingDetailReportAction">              
+            <forward name="success" path="/report_chargingdetail.jsp" />
+            <forward name="error" path="/report_chargingdetail.jsp" />
+        </action>
+        <action input="/" name="RegisterReportForm" path="/reportUserRegister" scope="request" type="com.tv.xeeng.reporttool.action.RegisterReportAction">
+            <forward name="success" path="/report_registers.jsp" />
+            <forward name="error" path="/report_registers.jsp" />
+        </action>
+        <action input="/" name="DailyStatReportForm" path="/reportDailyStat" scope="request" type="com.tv.xeeng.reporttool.action.DailyStatReportAction">
+            <forward name="success" path="/report_dailystat.jsp" />
+            <forward name="error" path="/report_dailystat.jsp" />
+        </action>
+        
+        <action input="/" name="UserByDayReportForm" path="/reportbyday" scope="request" type="com.tv.xeeng.reporttool.action.UserByDayReportAction">
+            <forward name="success" path="/report_usersbyday.jsp" />
+            <forward name="error" path="/report_usersbyday.jsp" />
+        </action>
+
+        <action input="/" name="UserByPartnerReportForm" path="/reportbypartner" scope="request" type="com.tv.xeeng.reporttool.action.UserByPartnerReportAction">
+            <forward name="success" path="/report_usersbypartner.jsp" />
+            <forward name="error" path="/report_usersbypartner.jsp" />
+        </action>
+        
+        <action input="/" name="ChangePasswordForm" path="/account" scope="request" type="com.tv.xeeng.reporttool.action.AccountAction">
+            <forward name="success" path="/account.jsp" />
+            <forward name="error" path="/account.jsp" />
+        </action>
+        <action input="/" name="AdvListForm" path="/advertisinglist" scope="request" type="com.tv.xeeng.reporttool.action.AdvListAction">
+            <forward name="success" path="/pages/admin/admin_advertising_list.jsp" />
+            <forward  name="error" path="/pages/admin/admin_advertising_list.jsp" />            
+        </action>
+        <action input="/" name="AdvListForm" path="/advertisingdetail" scope="request" type="com.tv.xeeng.reporttool.action.AdvDetailAction">
+            <forward name="success" path="/pages/admin/admin_advertising_detail.jsp" />
+            <forward name="error" path="/pages/admin/admin_advertising_detail.jsp" />    
+        </action>
+        <action input="/" name="PartnerMonthlyReportForm" path="/partnermonthly" scope="request" type="com.tv.xeeng.reporttool.action.PartnerMonthlyReportAction">
+            <forward name="success" path="/pages/admin/admin_partnermonthly.jsp" />
+            <forward name="error" path="/pages/admin/admin_partnermonthly.jsp" />    
+        </action>
+        <action input="/" name="UserForm" path="/superuserslist" scope="request" type="com.tv.xeeng.reporttool.action.SuperUsersAction">
+            <forward name="success" path="/pages/admin/admin_superusers_list.jsp" />
+            <forward name="error" path="/pages/admin/admin_superusers_list.jsp" />    
+        </action>
+        
+        <action path="/changeusercash" name="ChangeUserCashForm" type="com.tv.xeeng.reporttool.action.ChangeUserCashAction" scope="request" validate="false" >
+            <forward name="input" path="/change_usercash.jsp"/>
+            <forward name="success" path="/success_notifi.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+        
+        <action path="/exportUser" type="com.tv.xeeng.reporttool.action.ExportUserAction" scope="request" validate="false" >
+            <forward name="success" path="/success_notifi.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+        
+        <action path="/monitor" input="/monitor.jsp" type="com.tv.xeeng.reporttool.action.MonitorAction" scope="request" validate="false" >
+            <forward name="success" path="/monitor.jsp"/>
+        </action>
+        
+        
+        <!--<action path="/login" forward="/login.jsp" />-->
+
+        <action path="/permit" forward="/permit.jsp" />
+        
+        <!-- XE Actions -->
+        <action path="/view_modify_money_log" input="/" type="com.tv.xeeng.reporttool.action.ViewModifyMoneyLogAction" scope="request" validate="false" >
+            <forward name="success" path="/view_modify_money_log.jsp"/>
+        </action>
+
+        <action path="/view_exchange_log" input="/" type="com.tv.xeeng.reporttool.action.ViewExchangeLogAction" scope="request" validate="false" >
+            <forward name="success" path="/view_money_exchange_log.jsp"/>
+        </action>
+
+        <action path="/view_money_charging_log" input="/" type="com.tv.xeeng.reporttool.action.ViewMoneyChargingLogAction" scope="request" validate="false" >
+            <forward name="success" path="/view_money_charging_log.jsp"/>
+        </action>
+
+        <action path="/view_report_user_log" input="/" type="com.tv.xeeng.reporttool.action.ViewReportUserLogAction" scope="request" validate="false" >
+            <forward name="success" path="/view_report_user_log.jsp"/>
+        </action>
+
+        <action path="/view_money_statistics" input="/" type="com.tv.xeeng.reporttool.action.ViewMoneyStatisticsAction" scope="request" validate="false" >
+            <forward name="success" path="/view_money_statistics.jsp"/>
+        </action>
+
+        <action path="/view_user_statistics" input="/" type="com.tv.xeeng.reporttool.action.ViewUserStatisticsAction" scope="request" validate="false" >
+            <forward name="success" path="/view_user_statistics.jsp"/>
+        </action>
+
+        <action path="/view_device_statistics" input="/" type="com.tv.xeeng.reporttool.action.ViewDeviceStatistics" scope="request" validate="false" >
+            <forward name="success" path="/view_device_statistics.jsp"/>
+        </action>
+
+        <action path="/view_shop_statistics" input="/" type="com.tv.xeeng.reporttool.action.ViewShopStatisticsAction" scope="request" validate="false" >
+            <forward name="success" path="/view_shop_statistics.jsp"/>
+        </action>
+
+        <action path="/view_user_detail" input="/" type="com.tv.xeeng.reporttool.action.ViewUserDetailAction" scope="request" validate="false" >
+            <forward name="success" path="/view_user_detail.jsp"/>
+        </action>
+
+        <action path="/edit_user_detail" input="/" type="com.tv.xeeng.reporttool.action.EditUserDetailAction" scope="request" validate="false" >
+            <forward name="success" path="/edit_user_detail.jsp"/>
+            <forward name="error" path="/error.jsp"/>
+        </action>
+
+        <action path="/lock_user" type="com.tv.xeeng.reporttool.action.LockUserAction" scope="request" validate="false">
+            <forward name="success" path="/view_user_detail.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+
+        <action path="/unlock_user" type="com.tv.xeeng.reporttool.action.UnlockUserAction" scope="request" validate="false">
+            <forward name="success" path="/view_user_detail.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+
+        <action path="/lock_chat_user" type="com.tv.xeeng.reporttool.action.LockChatUserAction" scope="request" validate="false">
+            <forward name="success" path="/view_user_detail.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+
+        <action path="/unlock_chat_user" type="com.tv.xeeng.reporttool.action.UnlockChatUserAction" scope="request" validate="false">
+            <forward name="success" path="/view_user_detail.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+
+        <action path="/lock_user_avatar" type="com.tv.xeeng.reporttool.action.LockUserAvatarAction" scope="request" validate="false">
+            <forward name="success" path="/view_user_detail.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+
+        <action path="/unlock_user_avatar" type="com.tv.xeeng.reporttool.action.UnlockUserAvatarAction" scope="request" validate="false">
+            <forward name="success" path="/view_user_detail.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+
+        <action path="/view_charging_monthly_statistics" type="com.tv.xeeng.reporttool.action.ViewMonthlyChargingStatistics" scope="request" validate="false">
+            <forward name="success" path="/view_monthly_charging_statistics.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+
+        <action path="/view_user_online_statistics" type="com.tv.xeeng.reporttool.action.ViewUserOnlineStatisticsAction" scope="request" validate="false">
+            <forward name="success" path="/view_user_online_statistics.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+
+        <action path="/view_match_log" type="com.tv.xeeng.reporttool.action.ViewMatchLog" scope="request" validate="false">
+            <forward name="success" path="/view_match_log.jsp"/>
+            <forward name="fail" path="/failure_notifi.jsp"/>
+        </action>
+
+        <action path="/view_campaign_statistics" input="/" type="com.tv.xeeng.reporttool.action.ViewCampaignStatisticsAction" scope="request" validate="false" >
+            <forward name="success" path="/view_campaign_statistics.jsp"/>
+        </action>
+
+        <action path="/404" type="com.tv.xeeng.reporttool.action.PageNotFoundAction" scope="request" validate="false">
+            <forward name="success" path="/404.jsp"/>
+        </action>
+        <!--XE Actions-->
+    </action-mappings>
+    
+    <!--<controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>-->
+
+    <message-resources parameter="i18n/ApplicationResource"/>
+
+    <!-- ========================= Validator plugin ================================= -->
+
+</struts-config>

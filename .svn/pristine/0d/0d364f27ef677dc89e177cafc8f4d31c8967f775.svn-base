@@ -1,0 +1,93 @@
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Open Sans'), local('OpenSans'), url('../fonts/open-sans.woff') format('woff');
+}
+
+
+body > .header .logo {
+    font-family: "Source Sans Pro",sans-serif;
+}
+
+body {
+    font-family: 'Open Sans', "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    width: 100%;
+}
+
+table {
+    font-size: 14px;
+}
+
+td {
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
+    /*white-space: nowrap;*/
+    /*max-width: 300px;*/
+}
+
+th {
+    text-align: center;
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
+    white-space: nowrap;
+    /*max-width: 300px;*/
+}
+
+.alert {
+    padding: 10px 15px;
+}
+
+input[type=radio] {
+    cursor: pointer;
+}
+
+label {
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.panel-default > .panel-heading.danger {
+    color: #FFF;
+    background-color: #D9534F;
+    border-color: #D43F3A;
+}
+
+.panel-default > .panel-heading.warning {
+    color: #FFF;
+    background-color: #F0AD4E;
+    border-color: #EEA236;
+}
+
+.form-group button {
+    position: relative;
+    top: -2px;
+}
+
+.datepicker.dropdown-menu td.day {
+    border: solid 1px #d3d3d3;
+    cursor: pointer;
+}
+
+.datepicker.dropdown-menu td.day:hover, .datepicker.dropdown-menu td span:hover {
+    background-color: #d3d3d3;
+}
+
+.datepicker.dropdown-menu td span {
+    border: solid 1px #d3d3d3;
+    border-radius: 2px;
+    margin-left: 2px;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.align-right {
+    text-align: right;
+}

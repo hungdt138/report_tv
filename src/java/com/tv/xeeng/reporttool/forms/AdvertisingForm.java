@@ -1,0 +1,293 @@
+package com.tv.xeeng.reporttool.forms;
+
+import org.apache.struts.action.ActionForm;
+
+public class AdvertisingForm extends ActionForm {
+	private int advertisingId;
+	private String content;
+	private String createdDate;
+	private String createdTime;
+	private boolean isDisplay;
+	private int partnerId;
+	private String startDate;
+	private String endDate;
+	private String startTime;
+	private String endTime;
+	
+	
+	private String shour;
+	private String sminutes;
+	private String ssecond;
+
+	private String ehour;
+	private String eminutes;
+	private String esecond;
+	
+	private String chour;
+	private String cminutes;
+	private String csecond;
+	
+	public AdvertisingForm () { 
+		
+	}
+
+
+
+	public AdvertisingForm(int advertisingId, String content,
+			String createdDate, boolean isDisplay, int partnerId,
+			String startDate, String endDate, String startTime, String endTime,
+			String shour, String sminutes, String ssecond, String ehour,
+			String eminutes, String esecond, String chour, String cminutes,
+			String csecond, String createdTime) {
+		super();
+		this.advertisingId = advertisingId;
+		this.content = content;
+		this.createdDate = createdDate;
+		this.isDisplay = isDisplay;
+		this.partnerId = partnerId;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.shour = shour;
+		this.sminutes = sminutes;
+		this.ssecond = ssecond;
+		this.ehour = ehour;
+		this.eminutes = eminutes;
+		this.esecond = esecond;
+		this.chour = chour;
+		this.cminutes = cminutes;
+		this.csecond = csecond;
+		this.createdTime = createdTime;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public int getAdvertisingId() {
+		return advertisingId;
+	}
+
+
+
+
+
+
+	public void setAdvertisingId(int advertisingId) {
+		this.advertisingId = advertisingId;
+	}
+
+
+
+
+
+
+	public String getCreatedDate() {
+		return createdDate;
+	}
+
+
+
+
+
+
+	public void setCreatedDate(String createdDate) {
+		this.createdDate = createdDate;
+	}
+
+
+	public String getChour() {
+		return chour;
+	}
+
+
+
+
+
+
+	public void setChour(String chour) {
+		this.chour = chour;
+	}
+
+
+
+
+
+
+	public String getCminutes() {
+		return cminutes;
+	}
+
+
+
+
+
+
+	public void setCminutes(String cminutes) {
+		this.cminutes = cminutes;
+	}
+
+
+
+
+
+
+	public String getCsecond() {
+		return csecond;
+	}
+
+
+
+
+
+
+	public void setCsecond(String csecond) {
+		this.csecond = csecond;
+	}
+
+
+
+
+
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public boolean getIsDisplay() {
+		return isDisplay;
+	}
+
+	public void setIsDisplay(boolean isDisplay) {
+		this.isDisplay = isDisplay;
+	}
+
+	public int getPartnerId() {
+		return partnerId;
+	}
+
+	public void setPartnerId(int partnerId) {
+		this.partnerId = partnerId;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+	public String getShour() {
+		return shour;
+	}
+
+	public void setShour(String shour) {
+		this.shour = shour;
+	}
+
+	public String getSminutes() {
+		return sminutes;
+	}
+
+	public void setSminutes(String sminutes) {
+		this.sminutes = sminutes;
+	}
+
+	public String getSsecond() {
+		return ssecond;
+	}
+
+	public void setSsecond(String ssecond) {
+		this.ssecond = ssecond;
+	}
+
+	public String getEhour() {
+		return ehour;
+	}
+
+	public void setEhour(String ehour) {
+		this.ehour = ehour;
+	}
+
+	public String getEminutes() {
+		return eminutes;
+	}
+
+	public void setEminutes(String eminutes) {
+		this.eminutes = eminutes;
+	}
+
+	public String getEsecond() {
+		return esecond;
+	}
+
+	public void setEsecond(String esecond) {
+		this.esecond = esecond;
+	}
+
+	public void setDisplay(boolean isDisplay) {
+		this.isDisplay = isDisplay;
+	}
+
+
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+
+
+
+	public String getCreatedTime() {
+		return createdTime;
+	}
+
+
+
+	public void setCreatedTime(String createdTime) {
+		this.createdTime = createdTime;
+	}
+	
+	
+	
+	
+}

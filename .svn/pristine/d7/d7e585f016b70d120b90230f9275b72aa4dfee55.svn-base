@@ -1,0 +1,73 @@
+a {
+    color: #16387C;
+    font-weight:normal;
+}
+a.selected {
+    color: #16387C;
+    font-weight:bold;
+}
+.paneInfo {
+    border: 1px #555555 solid;
+}
+.label {
+    color: #000000;
+    font-size: 12pt;
+    text-align: right;
+    padding:3px 8px;
+}
+.info {
+    color: #000000;
+    font-size: 12pt;
+    padding:3px 0px;
+}
+.infoBold {
+    color: #000000;
+    font-size: 12pt;
+    font-weight:bold;
+    padding:3px 0px;
+}
+.paneHeader {
+    background-color: #E5E9F0;
+    font-size: 12pt;
+    font-weight: bold;
+    text-align: center;
+}
+#userDetails .label{
+    width:200px;
+}
+.error {
+    font-size: 13pt;
+    color:#333333;
+    padding:3px 5px;
+    border:1px #CC3300 solid;
+    background-color:#F9E6E6;
+    margin:3px 0;
+}
+.inform {
+    font-size: 13pt;
+    color:#333333;
+    padding:3px 5px;
+    border:1px #F0C000 solid;
+    background-color:#FFFFCE;
+    margin:3px 0;
+}
+.hr {
+    border-color:#CCCCCC #CCCCCC #CCCCCC #CCCCCC;
+    border-style:solid;
+    border-width:1px 0 0 0;
+    display:block;
+    height:0px;
+    line-height:0px;
+}
+.leftTd {
+    text-align:left;
+    padding:0 3px;
+}
+.centerTd {
+    text-align:center;
+    padding:0 3px;
+}
+.rightTd {
+    text-align:right;
+    padding:0 3px;
+}

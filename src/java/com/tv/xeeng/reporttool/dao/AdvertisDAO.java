@@ -1,0 +1,273 @@
+package com.tv.xeeng.reporttool.dao;
+
+import com.tv.xeeng.reporttool.beans.AdvertisingBean;
+import com.tv.xeeng.reporttool.beans.UserBean;
+
+import java.sql.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+public class AdvertisDAO {
+
+    public List<AdvertisingBean> getAll(int pageCurrent) {
+        Connection conn = null;
+        PreparedStatement psmt = null;
+        PreparedStatement psmt2 = null;
+        ResultSet rs1 = null;
+        ResultSet rs2 = null;
+
+        int rowNumDisplay = 20;
+        int rowIdFirst = ((pageCurrent - 1) * rowNumDisplay) + 1;
+        int rowIdLast = rowIdFirst + (rowNumDisplay - 1);
+        int totalRc = 0;
+        int totalPage = 0;
+        List<AdvertisingBean> advList = new ArrayList<AdvertisingBean>();
+        String sql1 = "SELECT [advertisingId] = COUNT(advertisingId) FROM advertising";
+        String sql2 = "select * from  (select *,row_number() over (order by advertisingId DESC) as r from advertising ) data_row where r >=? and r <= ?";
+        try {
+            conn = DBPoolConnection.getConnection();
+            psmt = conn.prepareStatement(sql1);
+            rs1 = psmt.executeQuery();
+            if (rs1.next()) {
+                totalRc = rs1.getInt(1);
+                totalPage = totalRc / rowNumDisplay;
+                if (totalRc > (totalPage * rowNumDisplay)) {
+                    totalPage = totalPage + 1;
+                }
+                if (totalPage > 0) {
+                    psmt2 = conn.prepareStatement(sql2);
+                    psmt2.setInt(1, rowIdFirst);
+                    psmt2.setInt(2, rowIdLast);
+                    rs2 = psmt2.executeQuery();
+                    while (rs2.next()) {
+                        AdvertisingBean advBean = new AdvertisingBean();
+                        advBean.setAdvertisingId(rs2.getInt(1));
+                        advBean.setContent(rs2.getString(2));
+
+                        String createDate = rs2.getDate(3).toString() + " " + rs2.getTime(3).toString();
+                        advBean.setCreatedDate(createDate);
+
+                        advBean.setDisplay(rs2.getBoolean(5));
+                        advBean.setPartnerId(rs2.getInt(6));
+                        if (rs2.getDate(7) != null) {
+                            String startDate = rs2.getDate(7).toString() + " " + rs2.getTime(7).toString();
+                            advBean.setStartDate(startDate);
+                        }
+                        if (rs2.getDate(8) != null) {
+                            String endDate = rs2.getDate(8).toString() + " " + rs2.getTime(8).toString();
+                            advBean.setEndDate(endDate);
+                        }
+
+                        advBean.setTotalPage(totalPage);
+                        advBean.setTotalRecord(totalRc);
+
+                        advList.add(advBean);
+                    }
+
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                rs1.close();
+                rs2.close();
+                psmt.close();
+                psmt2.close();
+                conn.close();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        return advList;
+    }
+
+    public AdvertisingBean getAdvById(int advId) {
+        AdvertisingBean advBean = new AdvertisingBean();
+        try {
+            Connection conn = DBPoolConnection.getConnection();
+            String sql = "SELECT [advertisingId],[content],[createdDate],[webUserId],[isDisplay],[partnerId],[startDate],[endDate] FROM advertising WHERE advertisingId = ?";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, advId);
+            ResultSet rs1 = psmt.executeQuery();
+            while (rs1.next()) {
+                advBean.setAdvertisingId(rs1.getInt("advertisingId"));
+                advBean.setContent(rs1.getString("content"));
+
+                String createDate = rs1.getDate("createdDate").toString();
+                advBean.setCreatedDate(createDate);
+                String createdTime = rs1.getTime("createdDate").toString();
+                advBean.setCreatedTime(createdTime);
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime((Date) rs1.getTime("createdDate"));
+                int hours = calendar.get(Calendar.HOUR_OF_DAY);
+                int minutes = calendar.get(Calendar.MINUTE);
+                int seconds = calendar.get(Calendar.SECOND);
+                advBean.setChour(String.valueOf(hours));
+                advBean.setCminutes(String.valueOf(minutes));
+                advBean.setCsecond(String.valueOf(seconds));
+
+                advBean.setDisplay(rs1.getBoolean("isDisplay"));
+                advBean.setPartnerId(rs1.getInt("partnerId"));
+
+                if (rs1.getDate(7) != null) {
+                    String startDate = rs1.getDate(7).toString();
+                    advBean.setStartDate(startDate);
+                    String startTime = rs1.getTime(7).toString();
+                    advBean.setStartTime(startTime);
+                    calendar.setTime((Date) rs1.getTime(7));
+                    hours = calendar.get(Calendar.HOUR_OF_DAY);
+                    minutes = calendar.get(Calendar.MINUTE);
+                    seconds = calendar.get(Calendar.SECOND);
+                    advBean.setShour(String.valueOf(hours));
+                    advBean.setSminutes(String.valueOf(minutes));
+                    advBean.setSsecond(String.valueOf(seconds));
+                }
+                if (rs1.getDate(8) != null) {
+                    String endDate = rs1.getDate(8).toString();
+                    advBean.setEndDate(endDate);
+                    String endTime = rs1.getTime(8).toString();
+                    advBean.setEndTime(endTime);
+                    calendar.setTime((Date) rs1.getTime(8));
+                    hours = calendar.get(Calendar.HOUR_OF_DAY);
+                    minutes = calendar.get(Calendar.MINUTE);
+                    seconds = calendar.get(Calendar.SECOND);
+                    advBean.setEhour(String.valueOf(hours));
+                    advBean.setEminutes(String.valueOf(minutes));
+                    advBean.setEsecond(String.valueOf(seconds));
+                }
+
+            }
+            rs1.close();
+            psmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return advBean;
+    }
+
+    public int addAdvertising(AdvertisingBean newAdvBean, UserBean loggedInUser) {
+        int result = 0;
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        java.util.Date d = new java.util.Date();
+        String createdDate = dateFormat.format(d).toString();
+
+        try {
+            String stDate = dateFormat.format(d = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(newAdvBean.getStartDate())).toString();
+            String enDate = dateFormat.format(d = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(newAdvBean.getEndDate())).toString();
+            Connection conn = DBPoolConnection.getConnection();
+            String sql = "{call uspXEInsertAdvertising(?, ?, ?, ?, ?, ?, ?, ?) }";
+            CallableStatement cs = conn.prepareCall(sql);
+
+            cs.setString(1, newAdvBean.getContent());
+            cs.setString(2, createdDate);
+            cs.setInt(3, newAdvBean.getWebUserId());
+            cs.setBoolean(4, newAdvBean.isDisplay());
+            cs.setInt(5, newAdvBean.getPartnerId());
+            cs.setString(6, stDate);
+            cs.setString(7, enDate);
+            cs.setInt(8, (int) loggedInUser.getId());
+
+            result = cs.executeUpdate();
+
+            cs.close();
+            conn.close();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (ParseException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public int updateAdvertising(AdvertisingBean newadvBean) {
+        int result = 0;
+        try {
+            String sql = "UPDATE advertising SET [content] =? , [createdDate] = ?, [webUserId] = ? , [isDisplay] = ?, [partnerId] = ?, [startDate] = ?, [endDate] =? WHERE [advertisingId] = ?";
+            Connection conn = DBPoolConnection.getConnection();
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            psmt.setString(1, newadvBean.getContent());
+            psmt.setString(2, newadvBean.getCreatedDate());
+            psmt.setInt(3, newadvBean.getWebUserId());
+            psmt.setBoolean(4, newadvBean.isDisplay());
+            psmt.setInt(5, newadvBean.getPartnerId());
+            psmt.setString(6, newadvBean.getStartDate());
+            psmt.setString(7, newadvBean.getEndDate());
+            psmt.setInt(8, newadvBean.getAdvertisingId());
+
+            result = psmt.executeUpdate();
+
+            psmt.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public int deleteAdvertising(int advId) {
+        int result = 0;
+        String sql = "DELETE FROM advertising WHERE advertisingId = ?";
+        Connection conn;
+        try {
+            conn = DBPoolConnection.getConnection();
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, advId);
+            result = psmt.executeUpdate();
+
+            psmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    //Unit test
+    public static void main(String[] args) {
+//		List<AdvertisingBean> advL = new AdvertisDAO().getAll(1);
+//		System.out.print(advL.size());
+        //===========getByID=======
+//		AdvertisingBean advBean = new AdvertisDAO().getAdvById(10);
+//		System.out.print(advBean.getAdvertisingId() + " " + advBean.getContent() + " " + advBean.getCreatedDate() + " " + advBean.getStartDate() + " " + advBean.getEndDate());
+//		//=====add
+//		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//		java.util.Date d = new java.util.Date();
+////		try {
+//			d = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2014-03-27 10:47:55");
+//		} catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+////		System.out.print(dateFormat.format(d).toString());
+//		AdvertisingBean advB  = new AdvertisingBean();
+//		advB.setAdvertisingId(10);
+//		advB.setContent("Huhmmmm");
+//		advB.setCreatedDate(dateFormat.format(d).toString());
+//		advB.setDisplay(false);
+//		advB.setPartnerId(96);
+//		advB.setStartDate("2012-12-21");
+//		advB.setEndDate("2016-03-27");
+//		int kq = new AdvertisDAO().addAdvertising(advB);
+//		System.out.print("kq: "+kq);
+//		=====DELETE=====
+//		int rs = new AdvertisDAO().deleteAdvertising(9);
+//		System.out.print(rs);
+
+    }
+
+}

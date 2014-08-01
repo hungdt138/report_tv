@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration>
+    <appender name="LOG_TO_FILE" class="org.apache.log4j.AsyncAppender">
+        <appender-ref ref="TEMP"/>
+    </appender>
+    <!--<appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">-->
+        <!--<param name="Target" value="System.out" />-->
+        <!--<layout class="org.apache.log4j.PatternLayout">-->
+            <!--<param name="ConversionPattern"-->
+              <!--value="[%d{ISO8601}] %-5p [%c{1}] %m %n" />-->
+        <!--</layout>-->
+        <!--<filter class="org.apache.log4j.varia.LevelRangeFilter">-->
+            <!--<param name="LevelMin" value="DEBUG"/>-->
+            <!--<param name="LevelMax" value="FATAL"/>-->
+        <!--</filter>-->
+    <!--</appender>-->
+    <!--<appender name="STDERR"  class="org.apache.log4j.ConsoleAppender">-->
+        <!--<param name="Target" value="System.err" />-->
+        <!--<layout class="org.apache.log4j.PatternLayout">-->
+            <!--<param name="ConversionPattern"-->
+              <!--value="[%d{ISO8601}] %-5p [%c{1}] %m %n" />-->
+        <!--</layout>-->
+        <!--<filter class="org.apache.log4j.varia.LevelRangeFilter">-->
+            <!--<param name="LevelMin" value="WARN"/>-->
+            <!--<param name="LevelMax" value="FATAL"/>-->
+        <!--</filter>-->
+    <!--</appender>-->
+    <!-- 2008.09.03 change "FileAppender" to  "DailyRollingFileAppender" -->
+    <appender name="TEMP" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="../log/log.log" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <param name="Append" value="true" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+				value="[%d{ISO8601}] %-5p [%c{1}] %m %n" />
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="INFO"/>
+            <param name="LevelMax" value="FATAL"/>
+        </filter>
+    </appender>
+    <appender name="APPL_ERROR"	class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="../log/log_error.log" />
+        <param name="MaxFileSize" value="1024KB" />
+        <param name="MaxBackupIndex" value="3" />
+        <param name="Append" value="true" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+				value="[%d{ISO8601}] %-5p [%c{1}] %m %n" />
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="FATAL" />
+        </filter>
+    </appender>
+    <!--                           -->
+    <!-- setup log4j's root logger -->
+    <!--                           -->
+    <root>
+        <level value="all" />
+        <appender-ref ref="LOG_TO_FILE"/>
+        <!--<appender-ref ref="STDOUT"/>-->
+        <!--<appender-ref ref="STDERR"/>-->
+        <appender-ref ref="APPL_ERROR" />
+    </root>
+</log4j:configuration>

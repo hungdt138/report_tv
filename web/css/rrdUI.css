@@ -1,0 +1,17 @@
+.graphContainer {
+	display: block;
+	border: 1px solid lightgray;
+	float: left;
+	margin: 1em;
+	padding: 2em;
+}
+.graph {
+	float: left;
+}
+.gTitle {
+	display: block;
+	float: left;
+	clear: both;
+	width: 100%;
+	text-align: center;
+}
