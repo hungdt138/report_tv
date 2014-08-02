@@ -3,16 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Project/Report/src/java/com/tv/xeeng/reporttool/beans/AdminAdvBean.java</file>
-            <file>file:/D:/Project/Report/src/java/com/tv/xeeng/reporttool/action/ViewUserDetailAction.java</file>
-            <file>file:/D:/Project/Report/web/giftcode.jsp</file>
-            <file>file:/D:/Project/Report/web/WEB-INF/struts-config.xml</file>
-            <file>file:/D:/Project/Report/src/java/com/tv/xeeng/reporttool/dao/UserDAO.java</file>
-            <file>file:/D:/Project/Report/src/java/com/tv/xeeng/reporttool/dao/DBPoolConnection.java</file>
-            <file>file:/D:/Project/Report/src/java/com/tv/xeeng/reporttool/dao/GiffCodeDAO.java</file>
-            <file>file:/D:/Project/Report/src/java/com/tv/xeeng/reporttool/dao/AdvertisDAO.java</file>
+            <file>file:/D:/Project/Report/src/java/com/tv/xeeng/reporttool/action/ViewGiftEventAction.java</file>
+            <file>file:/D:/Project/Report/src/java/com/tv/xeeng/reporttool/action/GiftCodeListAction.java</file>
+            <file>file:/D:/Project/Report/web/view_item_event.jsp</file>
+            <file>file:/D:/Project/Report/web/view_gift_event.jsp</file>
+            <file>file:/D:/Project/Report/src/java/com/tv/xeeng/reporttool/action/ViewItemEventAction.java</file>
+            <file>file:/D:/Project/Report/src/java/com/tv/xeeng/reporttool/beans/LogEventGiftHistory.java</file>
             <file>file:/D:/Project/Report/src/java/com/tv/xeeng/reporttool/dao/LogEventDAO.java</file>
-            <file>file:/D:/Project/Report/src/java/com/tv/xeeng/reporttool/forms/GiftCodeUseForm.java</file>
         </group>
     </open-files>
 </project-private>

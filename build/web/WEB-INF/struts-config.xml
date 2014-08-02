@@ -378,6 +378,12 @@
         <action path="/404" type="com.tv.xeeng.reporttool.action.PageNotFoundAction" scope="request" validate="false">
             <forward name="success" path="/404.jsp"/>
         </action>
+        <action path="/view_item_event" type="com.tv.xeeng.reporttool.action.ViewItemEventAction" scope="request" validate="false">
+            <forward name="success" path="/view_item_event.jsp"/>
+        </action>
+        <action path="/view_gift_event" type="com.tv.xeeng.reporttool.action.ViewGiftEventAction" scope="request" validate="false">
+            <forward name="success" path="/view_gift_event.jsp"/>
+        </action>
         <!--XE Actions-->
     </action-mappings>
     

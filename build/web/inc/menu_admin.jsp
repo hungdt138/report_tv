@@ -43,6 +43,11 @@
     <a href="view_modify_money_log.html">Thay đổi bằng Tool</a>
     <a href="view_money_charging_log.html">Nạp tiền</a>
 </li>
+<li style="height: 110px;">
+    <a>Quản lý Event</a>
+    <a href="view_item_event.html">Log item</a>
+    <a href="view_gift_event.html">Log quà tăng</a>
+</li>
 <li style="height: 245px;">
     <a>Khác</a>
     <a id="register1" href="reportUserRegister.html?action=prepareReport&statusTag=register1">Danh sách User theo
