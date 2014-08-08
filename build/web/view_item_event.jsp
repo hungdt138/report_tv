@@ -28,7 +28,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        Log item
+        Nhật ký vật phẩm
     </h1>
 </section>
 
@@ -37,59 +37,71 @@
     <div class="filter-container">
         <form>
             <div class="form-group">
-                <span>Tên đăng nhập</span>
+                <span>Tên người chơi</span>
                 <input type="text" name="u" class="form-control" value="${username}"/>
-                <span>Mã item</span>
-                <input type="text" name="i" class="form-control" value="${itemCode}"/>
                 <span>Từ ngày</span>
                 <input class="form-control date-picker" type="text" name="f" value="${fromDate}"/>
                 <span class="">Đến ngày</span>
                 <input class="form-control date-picker" type="text " name="t" value="${toDate}"/>
+                <span>Sự kiện</span>
+                <select  name="e" class="form-control">
+                     <option value="0">-- Chọn sự kiện --</option>
+                    <c:forEach items="${lstEvent}" var="e" step="1" begin="0">
+                        
+                        <c:if test="${eventId == e.id}">
+                            <option value="${e.id}" selected="selected">${e.name}</option>
+                        </c:if>
+                        <c:if test="${eventId != e.id}">
+                            <option value="${e.id}">${e.name}</option>
+                        </c:if>
+                    </c:forEach>
+                </select>
 
                 <input type="submit" class="btn btn-primary" value="Lọc"/>
             </div>
         </form>
     </div>
+    <div class="filter-container" style="margin-bottom: 10px;">
+        <span style="font-size: 17px;">Có <b>${total}</b> người tham gia sự kiện.</span>
 
+    </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>UserID</th>
-                            <th>Tên đăng nhập</th>
-                            <th class="text-right">Mã item</th>
-                            <th class="text-right">Nội dung</th>
-                            <th class="text-right">Thời gian nhận</th>
+                            <th class="text-left">UserID</th>
+                            <th class="text-left">Tên hiển thị</th>
+                            <th class="text-left">Nội dung</th>
+                            <th class="text-left">Thời gian nhận</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <c:if test="${lstSize != 0}">
-                        <c:forEach items="${log}" var="l">
-                            <tr style="text-align: center;">
-                                <td>${l.userid}</td>
-                                <td>${l.username}</td>
-                                <td class="text-right">${l.itemCode}</td>
-                                <td class="text-right">${l.message}</td>
-                                <td class="text-right" title="<fmt:formatDate pattern="dd/MM/yyyy HH:mm:ss" value="${l.datetime}" />"><fmt:formatDate pattern="dd/MM/yyyy" value="${l.datetime}" /></td>
+                        <c:if test="${lstSize != 0}">
+                            <c:forEach items="${log}" var="l">
+                                <tr style="text-align: center;">
+                                    <td class="text-left">${l.userid}</td>
+                                    <td class="text-left">${l.username}</td>
+                                    <td class="text-left">${l.message}</td>
+                                    <td class="text-left" title="<fmt:formatDate pattern="dd/MM/yyyy HH:mm:ss" value="${l.datetime}" />"><fmt:formatDate pattern="dd/MM/yyyy" value="${l.datetime}" /></td>
+                                </tr>
+                            </c:forEach>
+                        </c:if>
+                        <c:if test="${lstSize == 0}">
+                            <tr>
+                                <td colspan="5" style="text-align: center;">Không có dữ liệu </td>
                             </tr>
-                        </c:forEach>
-                    </c:if>
-<c:if test="${lstSize == 0}">
-    <tr>
-        <td colspan="5" style="text-align: center;">Không có dữ liệu </td>
-    </tr>
-                        
-                    </c:if>
+
+                        </c:if>
                     </tbody>
                 </table>
 
                 <div class="text-right">
                     <ul class="pagination">
                         <c:if test="${page > 1}">
-                            <li><a href="?p=1&u=${username}&i=${itemCode}&f=${fromDate}&t=${toDate}">Trang đầu</a></li>
-                            <li><a href="?p=${page - 1}&u=${username}&i=${itemCode}&f=${fromDate}&t=${toDate}">&laquo;</a></li>
+                            <li><a href="?p=1&u=${username}&f=${fromDate}&t=${toDate}&e=${eventId}">Trang đầu</a></li>
+                            <li><a href="?p=${page - 1}&u=${username}&f=${fromDate}&t=${toDate}&e=${eventId}">&laquo;</a></li>
                             </c:if>
 
                         <c:if test="${page <= 1}">
@@ -100,8 +112,8 @@
                         <li class="disabled"><span>${page} / ${totalPage}</span></li>
 
                         <c:if test="${page < totalPage}">
-                            <li><a href="?p=${page + 1}&u=${username}&i=${itemCode}&f=${fromDate}&t=${toDate}">&raquo;</a></li>
-                            <li><a href="?p=${totalPage}&u=${username}&i=${itemCode}&f=${fromDate}&t=${toDate}">Trang cuối</a></li>
+                            <li><a href="?p=${page + 1}&u=${username}&f=${fromDate}&t=${toDate}&e=${eventId}">&raquo;</a></li>
+                            <li><a href="?p=${totalPage}&u=${username}&f=${fromDate}&t=${toDate}&e=${eventId}">Trang cuối</a></li>
                             </c:if>
                             <c:if test="${page >= totalPage}">
                             <li class="disabled"><span>&raquo;</span></li>

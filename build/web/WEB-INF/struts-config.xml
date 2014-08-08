@@ -384,6 +384,18 @@
         <action path="/view_gift_event" type="com.tv.xeeng.reporttool.action.ViewGiftEventAction" scope="request" validate="false">
             <forward name="success" path="/view_gift_event.jsp"/>
         </action>
+        <action  path="/view_item_statistics" type="com.tv.xeeng.reporttool.action.viewItemStatisticsAction" scope="request" validate="false">
+            <forward name="success" path="/view_item_statistics.jsp"/>
+        </action>
+        <action  path="/view_gift_statistics" scope="request" type="com.tv.xeeng.reporttool.action.ViewGiftStatisticAction" validate="false">
+            <forward name="success" path="/view_gift_statistics.jsp"/>
+        </action>
+        <action path="/view_users_limit" scope="request" type="com.tv.xeeng.reporttool.action.ViewUsersLimitAction" validate="false">
+            <forward name="success" path="/view_users_limit.jsp"/>
+        </action>
+        <action path="/top_charging_money" scope="request" type="com.tv.xeeng.reporttool.action.TopChargingMoneyAction" validate="false">
+            <forward name="success" path="/top_charging_money.jsp"/>
+        </action>
         <!--XE Actions-->
     </action-mappings>
     

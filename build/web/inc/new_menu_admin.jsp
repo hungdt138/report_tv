@@ -43,6 +43,7 @@
                         class="fa fa-angle-double-right"></i> Theo thời gian</a></li>
             <li><a href="reportbypartner.html?action=prepareReport&menuItem=reportbypartner"><i
                         class="fa fa-angle-double-right"></i> Thống kê theo partner</a></li>
+            <li><a href="top_charging_money.html"><i class="fa fa-angle-double-right"></i> Top nạp tiền</a></li>
         </ul>
     </li>
 
@@ -91,8 +92,11 @@
             <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
-            <li><a href="view_item_event.html"><i class="fa fa-angle-double-right"></i> Log item</a></li>
-            <li><a href="view_gift_event.html"><i class="fa fa-angle-double-right"></i> Log gift</a></li>
+            <li><a href="view_item_event.html"><i class="fa fa-angle-double-right"></i>Nhật ký vật phẩm</a></li>
+            <li><a href="view_gift_event.html"><i class="fa fa-angle-double-right"></i>Nhật ký quà tặng</a></li>
+            <li><a href="view_item_statistics.html"><i class="fa fa-angle-double-right"></i>Thống kê vật phẩm</a></li>
+            <li><a href="view_gift_statistics.html"><i class="fa fa-angle-double-right"></i>Thống kê quà tặng</a></li>
+            <li><a href="view_users_limit.html"><i class="fa fa-angle-double-right"></i>DS người chơi đổi max event</a></li>
         </ul>
     </li>
 

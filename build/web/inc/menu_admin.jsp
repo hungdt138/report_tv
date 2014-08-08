@@ -11,7 +11,7 @@
     <a href="view_device_statistics.html">Thống kê thiết bị</a>
     <a href="view_user_online_statistics.html">Thống kê online</a>
 </li>
-<li style="height: 205px;">
+<li style="height: 225px;">
     <a>Quản lý doanh thu</a>
     <a href="view_shop_statistics.html">Cửa hàng</a>
     <a href="view_exchange_log.html">Nhật ký mua Gold</a>
@@ -20,6 +20,7 @@
        href="reportbyday.html?action=prepareReport&menuItem=reportbyday1">Thống kê theo thời gian</a>
     <a id="reportbyday2"
        href="reportbypartner.html?action=prepareReport&menuItem=reportbypartner">Thống kê theo partner</a>
+    <a href="top_charging_money.html">Top nạp tiền</a>
 </li>
 <li style="height: 110px;">
     <a>Quản lí nội dung</a>
@@ -43,10 +44,13 @@
     <a href="view_modify_money_log.html">Thay đổi bằng Tool</a>
     <a href="view_money_charging_log.html">Nạp tiền</a>
 </li>
-<li style="height: 110px;">
+<li style="height: 195px;">
     <a>Quản lý Event</a>
-    <a href="view_item_event.html">Log item</a>
-    <a href="view_gift_event.html">Log quà tăng</a>
+    <a href="view_item_event.html">Nhật ký vật phẩm</a>
+    <a href="view_gift_event.html">Nhật ký quà tăng</a>
+    <a href="view_item_statistics.html">Thống kê vật phẩm</a>
+    <a href="view_gift_statistics.html">Thống kê quà tặng</a>
+    <a href="view_users_limit.html">DS người chơi đổi max event</a>
 </li>
 <li style="height: 245px;">
     <a>Khác</a>

@@ -2,14 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/D:/Project/Report/src/java/com/tv/xeeng/reporttool/action/ViewGiftEventAction.java</file>
-            <file>file:/D:/Project/Report/src/java/com/tv/xeeng/reporttool/action/GiftCodeListAction.java</file>
-            <file>file:/D:/Project/Report/web/view_item_event.jsp</file>
-            <file>file:/D:/Project/Report/web/view_gift_event.jsp</file>
-            <file>file:/D:/Project/Report/src/java/com/tv/xeeng/reporttool/action/ViewItemEventAction.java</file>
-            <file>file:/D:/Project/Report/src/java/com/tv/xeeng/reporttool/beans/LogEventGiftHistory.java</file>
-            <file>file:/D:/Project/Report/src/java/com/tv/xeeng/reporttool/dao/LogEventDAO.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
